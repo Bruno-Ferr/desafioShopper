@@ -1,0 +1,29 @@
+networks:
+  redeDB:
+    driver: bridge 
+
+services:
+  db: 
+    image: brun1n28/desafio:db
+    environment:
+      - DB_HOST=Teste
+      - DB_DATABASE=ShopperDB
+      - DB_USERNAME=Shopper
+      - DB_PWD=123456
+      - DB_PORT=3306
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - redeDB
+
+  server:
+    image: brun1n28/desafio:1.0
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    ports:
+      - 8080:3333
+    networks:
+      - redeDB
+
+
+
+# subir com env-file .env
